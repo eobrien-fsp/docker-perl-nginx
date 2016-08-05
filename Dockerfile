@@ -10,3 +10,7 @@ RUN apt-get update -y && \
 
 RUN rm -rf /var/lib/apt/lists/*
 
+EXPOSE 80
+
+ENTRYPOINT ["/usr/sbin/apache2ctl","-D FOREGROUND"]
+

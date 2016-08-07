@@ -1,6 +1,6 @@
 FROM ejspr5tr4/perl-base:latest
 
-MAINTAINER Eugene O'Brien <e.obrien@sportstg.com>
+MAINTAINER "Eugene O'Brien <e.obrien@sportstg.com>"
 
 RUN apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive \
@@ -18,7 +18,7 @@ RUN apt-get update -y && \
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
-COPY nginx.conf /etc/nginx/sites-available/default.conf
+COPY nginx.conf /etc/nginx/sites-available/default
 
 #RUN rm -rf /var/lib/apt/lists/*
 

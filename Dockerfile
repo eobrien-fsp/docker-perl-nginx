@@ -5,12 +5,28 @@ MAINTAINER Eugene O'Brien <e.obrien@sportstg.com>
 RUN apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y \
-    apache2 \
-    libapache2-mod-perl2
+    nginx \
+    spawn-fcgi \
+    fcgiwrap \
+    libfcgi-perl \
+    vim
 
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y \
+    supervisor
+
+COPY supervisord.conf /etc/supervisor/supervisord.conf
+
+COPY nginx.conf /etc/nginx/sites-available/default.conf
+
+#RUN rm -rf /var/lib/apt/lists/*
 
 EXPOSE 80
 
-ENTRYPOINT ["/usr/sbin/apache2ctl","-D FOREGROUND"]
+VOLUME ["/var/www/"]
+
+CMD ["/usr/bin/supervisord","--configuration=/etc/supervisor/supervisord.conf"]
+
+#ENTRYPOINT ["/usr/sbin/apache2ctl","-D FOREGROUND"]
 

@@ -3,6 +3,8 @@
 main();
 
 sub main {
-        print "Content-type:text/html\n\n";
-        print "<p>it worked</p>";
+    print "Content-type:text/html\n\n";
+    foreach my $key (sort(keys(%ENV))) {
+        print "$key = $ENV{$key}<br>\n";
+    }
 }

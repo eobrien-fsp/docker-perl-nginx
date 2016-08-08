@@ -20,6 +20,8 @@ COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 COPY nginx.conf /etc/nginx/sites-available/default
 
+RUN mkdir /var/run/supervisor/
+
 #RUN rm -rf /var/lib/apt/lists/*
 
 EXPOSE 80
